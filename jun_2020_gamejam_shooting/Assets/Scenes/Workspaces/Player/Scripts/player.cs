@@ -6,6 +6,8 @@ namespace gamejam {
 
 	public class player : MonoBehaviour {
 		[SerializeField]
+		private int hp = 10;
+		[SerializeField]
 		private float reload_speed = 2;
 		[SerializeField]
 		private string player_mode = "player1";
@@ -19,6 +21,10 @@ namespace gamejam {
 		private Rigidbody2D aim_rb2d;
 		[SerializeField]
 		private GameObject aim;
+		[SerializeField]
+		private GameObject life;
+		[SerializeField]
+		private GameObject damage;
 
 		public float Horizontal => Input.GetAxis("Horizontal_" + player_mode);
 		public float Vertical => Input.GetAxis("Vertical_" + player_mode);
@@ -51,6 +57,7 @@ namespace gamejam {
 			if (Input.GetAxis("shot_" + player_mode) != 0) {
 				if (bullet_wait == false) {
 					Bullet.InstantiateShot(this.transform.position, AimVelocity);
+					//TODO
 					bullet_wait = true;
 				}
 			}
@@ -61,6 +68,17 @@ namespace gamejam {
 					bullet_wait_counter = 0;
 				}
 			}
+
+			if (hp == 0) {
+				gameObject.SetActive(false);
+			}
+		}
+
+		void OnTriggerEnter2D(Collider2D other) {
+			Bullet b = other.GetComponent<Bullet>();
+			//TODO
+			b.Diactivate(true);
+			hp -= 1;
 		}
 
 		private void Move() {
