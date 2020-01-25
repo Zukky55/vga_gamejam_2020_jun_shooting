@@ -9,6 +9,7 @@ public class bom : MonoBehaviour
     }
 
     void Update(){
-        
+        //Bullet
+
     }
 }
