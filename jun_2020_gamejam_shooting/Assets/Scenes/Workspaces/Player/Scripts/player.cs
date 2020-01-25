@@ -22,7 +22,7 @@ namespace gamejam {
 
 		public float Horizontal => Input.GetAxis("Horizontal_" + player_mode);
 		public float Vertical => Input.GetAxis("Vertical_" + player_mode);
-		public Vector3 Velocity => new Vector3(Horizontal * speed, Vertical * speed, 0f);
+		public Vector3 Velocity => new Vector3(Horizontal, Vertical, 0f);
 
 		public float AimHorizontal => Input.GetAxis("AimHorizontal_" + player_mode);
 		public float AimVertical => Input.GetAxis("AimVertical_" + player_mode);
@@ -64,8 +64,7 @@ namespace gamejam {
 		}
 
 		private void Move() {
-			rb2d.transform.position += Velocity;
-
+			rb2d.transform.position += Velocity * speed;
 		}
 	}
 }

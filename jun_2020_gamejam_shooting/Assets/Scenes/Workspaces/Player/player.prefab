@@ -114,6 +114,7 @@ GameObject:
   - component: {fileID: 8704524353592231172}
   - component: {fileID: 8704524353592231171}
   - component: {fileID: 8704524353592231170}
+  - component: {fileID: 7349856296294608597}
   m_Layer: 0
   m_Name: player
   m_TagString: Untagged
@@ -130,7 +131,7 @@ Transform:
   m_GameObject: {fileID: 8704524353592231169}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.49, y: 0.615, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_Children:
   - {fileID: 8704524352368284806}
   m_Father: {fileID: 0}
@@ -199,10 +200,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reload_speed: 0.5
   player_mode: player1
-  bullet_speed: 5
+  bullet_speed: 4
   speed: 0.1
   rb2d: {fileID: 8704524353592231170}
-  aim_rb2d: {fileID: 0}
+  aim_rb2d: {fileID: 8704524352368284807}
   aim: {fileID: 8704524352368284805}
 --- !u!50 &8704524353592231170
 Rigidbody2D:
@@ -225,3 +226,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!58 &7349856296294608597
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8704524353592231169}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2.3
