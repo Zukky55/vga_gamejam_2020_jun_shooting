@@ -6,51 +6,65 @@ namespace gamejam {
 
 	public class player : MonoBehaviour {
 		[SerializeField]
+		private float reload_speed = 2;
+		[SerializeField]
 		private string player_mode = "player1";
 		[SerializeField]
-		private float bullet_spead = 0.1f;
+		private float bullet_speed = 0.1f;
 		[SerializeField]
-		private float spead = 0.1f;
+		private float speed = 0.1f;
 		[SerializeField]
-		Rigidbody2D rb2d;
+		private Rigidbody2D rb2d;
+		[SerializeField]
+		private Rigidbody2D aim_rb2d;
+		[SerializeField]
+		private GameObject aim;
 
 		public float Horizontal => Input.GetAxis("Horizontal_" + player_mode);
 		public float Vertical => Input.GetAxis("Vertical_" + player_mode);
-		public Vector3 Velocity => new Vector3(Horizontal * spead, Vertical * spead, 0f);
+		public Vector3 Velocity => new Vector3(Horizontal * speed, Vertical * speed, 0f);
 
 		public float AimHorizontal => Input.GetAxis("AimHorizontal_" + player_mode);
 		public float AimVertical => Input.GetAxis("AimVertical_" + player_mode);
-		public Vector3 AimVelocity => new Vector3(AimHorizontal * bullet_spead, AimVertical * bullet_spead, 0f);
+		public Vector3 AimVelocity => new Vector3(AimHorizontal * bullet_speed, AimVertical * bullet_speed, 0f);
 
-		private int bullet_wait_counter = 0;
+		private float bullet_wait_counter = 0;
 		private bool bullet_wait = false;
 
 		void Start() {
 			rb2d = GetComponent<Rigidbody2D>();
+			aim_rb2d = aim.GetComponent<Rigidbody2D>();
 		}
 
 		void Update() {
-			Debug.Log($"vel of  {name} = {Velocity}");
+
 			if (Velocity != Vector3.zero) {
 				Move();
 			}
 
+			if (AimVelocity != Vector3.zero) {
+				aim_rb2d.transform.position = (AimVelocity + transform.position);
+			}
+			else aim_rb2d.transform.position = transform.position;
+
+
 			if (Input.GetAxis("shot_" + player_mode) != 0) {
-				if (!bullet_wait) {
+				if (bullet_wait == false) {
 					Bullet.InstantiateShot(this.transform.position, AimVelocity);
 					bullet_wait = true;
 				}
-				else {
-					bullet_wait_counter++;
-					if (bullet_wait_counter <= 20) bullet_wait = false;
+			}
+			if (bullet_wait == true) {
+				bullet_wait_counter += Time.deltaTime;
+				if (bullet_wait_counter >= reload_speed) {
+					bullet_wait = false;
+					bullet_wait_counter = 0;
 				}
 			}
 		}
 
 		private void Move() {
-			//transform.position += Velocity;
 			rb2d.transform.position += Velocity;
-			//rb2d.velocity = Velocity;
 
 		}
 	}

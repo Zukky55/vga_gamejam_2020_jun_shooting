@@ -292,7 +292,7 @@ InputManager:
     invert: 0
     type: 2
     axis: 0
-    joyNum: 1
+    joyNum: 0
   - serializedVersion: 3
     m_Name: Vertical_player1
     descriptiveName: 
@@ -308,7 +308,7 @@ InputManager:
     invert: 1
     type: 2
     axis: 1
-    joyNum: 1
+    joyNum: 0
   - serializedVersion: 3
     m_Name: Horizontal_player2
     descriptiveName: 
@@ -355,8 +355,8 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
-    axis: 3
-    joyNum: 1
+    axis: 2
+    joyNum: 0
   - serializedVersion: 3
     m_Name: AimVertical_player1
     descriptiveName: 
@@ -371,8 +371,8 @@ InputManager:
     snap: 0
     invert: 1
     type: 2
-    axis: 4
-    joyNum: 1
+    axis: 5
+    joyNum: 0
   - serializedVersion: 3
     m_Name: AimHorizontal_player2
     descriptiveName: 
@@ -410,17 +410,17 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick 1 button 4
+    positiveButton: joystick button 7
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
     dead: 0.001
     sensitivity: 1000
-    snap: 1
+    snap: 0
     invert: 0
     type: 0
     axis: 0
-    joyNum: 1
+    joyNum: 0
   - serializedVersion: 3
     m_Name: shot_player2
     descriptiveName: 
