@@ -2,14 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class bom : MonoBehaviour
-{
-    void Start(){
-        
-    }
+namespace gamejam {
 
-    void Update(){
-        //Bullet
+    public class bom : MonoBehaviour {
+        [SerializeField]
+        private int hp = 10;
+
+        void Start() {
+
+        }
+
+        void Update() {
+            if(hp == 0) {
+                gameObject.SetActive(false);
+            }
+
+        }
+
+        void OnTriggerEnter2D(Collider2D other) {
+            Bullet b = other.GetComponent<Bullet>();
+            b.Diactivate(true);
+            hp -= 1;
+            
+        }
 
     }
 }
