@@ -27,5 +27,26 @@ namespace gamejam
         #endregion
 
         List<Bullet> _bullets = new List<Bullet>();
+
+        public void Initialize() => Statemachine.SetState(State.Initialize);
+        public void CountDown() => Statemachine.SetState(State.CountDown);
+        public void InGame() => Statemachine.SetState(State.InGame);
+        public void Result() => Statemachine.SetState(State.Result);
+
+
+        private void Start()
+        {
+            Initialize();
+        }
+
+        private void Update()
+        {
+            Statemachine.Update();
+
+            if (Input.GetKeyDown(KeyCode.J)) CountDown();
+            if (Input.GetKeyDown(KeyCode.K)) InGame();
+            if (Input.GetKeyDown(KeyCode.L)) Result();
+
+        }
     }
 }

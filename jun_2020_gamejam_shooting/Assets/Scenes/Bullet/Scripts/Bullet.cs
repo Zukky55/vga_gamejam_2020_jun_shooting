@@ -17,10 +17,11 @@ namespace gamejam
         BulletParam _param = null;
         bool _isInitialized = false;
         bool _isUsing = false;
-
+        /// TODO: プレイヤーのパラメータを受け取る様にする。
+        /// ResourceManagerが弾のメモリリソースを最初に用意して使い回す様にする
         public static void InstantiateShot(Vector3 spawnPos, Vector3 velocity)
         {
-            var go = Resources.Load("Bullet") as GameObject;
+            var go = Resources.Load("bullet_pink") as GameObject;
             go = Instantiate(go, spawnPos, Quaternion.identity);
             var bullet = go.GetComponent<Bullet>();
             bullet.Shot(velocity);
@@ -76,13 +77,6 @@ namespace gamejam
         {
             _param = null;
             _isInitialized = false;
-        }
-
-        public enum BulletTag
-        {
-            Player1,
-            Player2,
-            Enemy,
         }
     }
 }
