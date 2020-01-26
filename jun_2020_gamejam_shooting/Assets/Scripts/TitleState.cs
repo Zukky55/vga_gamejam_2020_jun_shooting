@@ -20,6 +20,7 @@ namespace gamejam
         private void OnInitializeEnter(State obj)
         {
             if (!obj.Equals(State.Title)) return;
+            // tds
             title.SetActive(true);
         }
 
