@@ -28,7 +28,6 @@ namespace gamejam
         [SerializeField]
         private OwnerType _type;
 
-        ResourceManager rm;
 
         public float Horizontal => Input.GetAxis("Horizontal_" + player_mode);
         public float Vertical => Input.GetAxis("Vertical_" + player_mode);
@@ -43,10 +42,6 @@ namespace gamejam
         private float bullet_wait_counter = 0;
         private bool bullet_wait = false;
 
-        private void Awake()
-        {
-            rm = GameManager.Instance.ResourceManager;
-        }
 
         void Start()
         {
