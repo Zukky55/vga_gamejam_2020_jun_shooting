@@ -20,7 +20,7 @@ namespace gamejam
             GameManager.Instance.Statemachine.SubscribeEvent(When.Enter, OnInitializeEnter);
         }
 
-        public static Bullet GetBullet(OwnerType type, bool isUsing) => m_instance.getBullet(type, isUsing);
+        public static Bullet GetBullet(OwnerType type, bool isUsing = false) => m_instance.getBullet(type, isUsing);
 
         /// <summary>
         /// 条件に応じて弾の参照取得
