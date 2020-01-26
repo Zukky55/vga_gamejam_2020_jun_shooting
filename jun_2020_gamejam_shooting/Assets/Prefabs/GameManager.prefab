@@ -47,10 +47,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c300549a13fa8640baaed983bf6ada9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  param:
-    _startTimerDelayTime: 0
-    _timeLimit: 5
-    stopWatchEventTime: 1
   sprites:
   - {fileID: 21300000, guid: 7064c0d843cf27f4da1496a0dae55a13, type: 3}
   - {fileID: 21300000, guid: 6994e613d5a44d14ba3d84b3ea79fcdc, type: 3}
