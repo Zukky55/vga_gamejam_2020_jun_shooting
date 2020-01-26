@@ -40,6 +40,8 @@ namespace gamejam {
 		private float bullet_wait_counter = 0;
 		private bool bullet_wait = false;
 
+		[SerializeField]
+		private float offset ;
 
 		void Start() {
 			rb2d = GetComponent<Rigidbody2D>();
@@ -64,7 +66,7 @@ namespace gamejam {
 					if (player_mode == "player1") mode = OwnerType.Player1;
 					else if (player_mode == "player2") mode = OwnerType.Player2;
 					var b = ResourceManager.GetBullet(mode);
-					b.Shot(transform.position, AimVelocity.normalized * bullet_speed);
+					b.Shot(transform.position + AimVelocity.normalized * offset, AimVelocity.normalized * bullet_speed );
 					bullet_wait = true;
 				}
 			}

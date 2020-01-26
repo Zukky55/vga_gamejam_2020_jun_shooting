@@ -88,6 +88,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: bullet_bomb
       objectReference: {fileID: 0}
+    - target: {fileID: 3110963368714878168, guid: ce34e4fa73896484cb6d5c30e0c40dd1,
+        type: 3}
+      propertyPath: rb2d
+      value: 
+      objectReference: {fileID: 3193561553651383161}
+    - target: {fileID: 3110963368714878168, guid: ce34e4fa73896484cb6d5c30e0c40dd1,
+        type: 3}
+      propertyPath: param._type
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3110963368714878170, guid: ce34e4fa73896484cb6d5c30e0c40dd1,
         type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
@@ -100,3 +110,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce34e4fa73896484cb6d5c30e0c40dd1, type: 3}
+--- !u!50 &3193561553651383161 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 3110963368714878171, guid: ce34e4fa73896484cb6d5c30e0c40dd1,
+    type: 3}
+  m_PrefabInstance: {fileID: 539750135941072802}
+  m_PrefabAsset: {fileID: 0}
