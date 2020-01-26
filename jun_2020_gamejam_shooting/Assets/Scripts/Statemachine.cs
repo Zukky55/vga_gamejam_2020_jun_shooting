@@ -21,7 +21,6 @@ namespace gamejam
 
         public void Initialize() => SetState(State.Initialize);
         public void Title() => SetState(State.Title);
-        public void SelectCharactor() => SetState(State.SelectCharactor);
         public void CountDown() => SetState(State.CountDown);
         public void InGame() => SetState(State.InGame);
         public void Result() => SetState(State.Result);
@@ -75,7 +74,6 @@ namespace gamejam
     {
         Initialize,
         Title,
-        SelectCharactor,
         CountDown,
         InGame,
         Result,

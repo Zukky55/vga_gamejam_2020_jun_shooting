@@ -8,7 +8,7 @@ namespace gamejam
     {
         public void OnClick()
         {
-            GameManager.Instance.Statemachine.SelectCharactor();
+            GameManager.Instance.Statemachine.CountDown();
         }
     }
 }
