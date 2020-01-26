@@ -15,7 +15,7 @@ namespace gamejam
 
         public bool IsInitialized { get => isInitialized; set => isInitialized = value; }
 
-        private void Awake()
+        private void Start()
         {
             GameManager.Instance.Statemachine.SubscribeEvent(When.Enter, OnInitializeEnter);
         }

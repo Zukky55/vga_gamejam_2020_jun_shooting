@@ -8,7 +8,7 @@ namespace gamejam
     public class InitializeState : MonoBehaviour
     {
 
-        private void Awake()
+        private void Start  ()
         {
             GameManager.Instance.Statemachine.SubscribeEvent(When.Enter, OnStateEnter);
             GameManager.Instance.Statemachine.SubscribeEvent(When.Exit, OnStateExit);

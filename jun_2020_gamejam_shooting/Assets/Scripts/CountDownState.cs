@@ -23,7 +23,7 @@ namespace gamejam
         Timer timer;
         int index;
 
-        private void Awake()
+        private void Start()
         {
             GameManager.Instance.Statemachine.SubscribeEvent(When.Enter, OnStateEnter);
 
