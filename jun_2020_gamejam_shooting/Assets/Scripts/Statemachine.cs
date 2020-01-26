@@ -19,12 +19,6 @@ namespace gamejam
         public event Action<State> OnStateStay = s => { };
         public event Action<State> OnStateExit = s => Debug.Log($"Exit {s}");
 
-        public void Initialize() => SetState(State.Initialize);
-        public void Title() => SetState(State.Title);
-        public void CountDown() => SetState(State.CountDown);
-        public void InGame() => SetState(State.InGame);
-        public void Result() => SetState(State.Result);
-
         public void SubscribeEvent(When when, Action<State> what)
         {
             switch (when)

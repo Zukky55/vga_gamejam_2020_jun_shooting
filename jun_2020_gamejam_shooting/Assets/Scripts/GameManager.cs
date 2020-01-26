@@ -14,11 +14,12 @@ namespace gamejam
         internal Statemachine Statemachine => statemachine;
         internal ResourceManager ResourceManager => resourceManager;
 
-        public void SetWiner(OwnerType winer)
+        public void Result(OwnerType winer)
         {
             this.winer = winer;
             statemachine.SetState(State.Result);
         }
+
 
         private void OnStateEnter(State obj)
         {

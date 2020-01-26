@@ -13,6 +13,8 @@ namespace gamejam
         List<Bullet> bombBullets = new List<Bullet>();
         bool isInitialized = false;
 
+        public bool IsInitialized { get => isInitialized; set => isInitialized = value; }
+
         private void Awake()
         {
             GameManager.Instance.Statemachine.SubscribeEvent(When.Enter, OnInitializeEnter);

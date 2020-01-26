@@ -1,4 +1,7 @@
 ﻿using UnityEngine;
+using UniRx;
+using UniRx.Triggers;
+using UniRx.Async;
 
 namespace gamejam
 {
@@ -7,14 +10,17 @@ namespace gamejam
 
         private void Awake()
         {
-
             GameManager.Instance.Statemachine.SubscribeEvent(When.Enter, OnStateEnter);
             GameManager.Instance.Statemachine.SubscribeEvent(When.Exit, OnStateExit);
         }
 
-        private void OnStateEnter(State obj)
+        private async void OnStateEnter(State obj)
         {
             if (!obj.Equals(State.Initialize)) return;
+            var gm = GameManager.Instance;
+            await UniTask.WaitUntil(()=>gm.ResourceManager.IsInitialized);
+
+            gm.Statemachine.SetState(State.Title);
         }
 
         private void OnStateExit(State obj)
