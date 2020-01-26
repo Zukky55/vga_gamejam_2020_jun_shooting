@@ -68,6 +68,8 @@ namespace gamejam
             {
                 if (bullet_wait == false)
                 {
+                    var b = ResourceManager.GetBullet(OwnerType.Player1);
+                    b.Shot(transform.position, AimVelocity);
                     bullet_wait = true;
                 }
             }
