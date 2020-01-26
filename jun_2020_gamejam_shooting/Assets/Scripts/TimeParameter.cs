@@ -17,6 +17,10 @@ namespace gamejam
         [Header("タイマーの制限時間")]
         int _timeLimit;
 
+        [SerializeField]
+        float stopWatchEventTime = 1f;
+
+
         /// <summary>
         /// シナリオ終了してからタイマーを開始する迄の遅延時間
         /// </summary>
@@ -25,5 +29,7 @@ namespace gamejam
         /// タイマーの制限時間
         /// </summary>
         public int TimeLimit => _timeLimit;
+
+        public float StopWatchEventTime { get => stopWatchEventTime; set => stopWatchEventTime = value; }
     }
 }

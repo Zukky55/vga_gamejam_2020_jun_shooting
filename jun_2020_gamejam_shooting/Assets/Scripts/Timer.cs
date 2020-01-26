@@ -29,6 +29,8 @@ namespace gamejam
         /// </summary>
         public event Action OnEndTimer = () => { };
 
+        public event Action OnStopWatchEvent = () => { };
+
         /// <summary>
         /// TimeLimit.
         /// </summary>
@@ -44,7 +46,7 @@ namespace gamejam
         /// </summary>
         public bool IsTimerRunning { get; private set; } = false;
 
-
+        float remainTimeOfStopWatch;
         /// <summary>
         /// 毎フレーム時間経過させる。
         /// タイムリミット
@@ -55,7 +57,14 @@ namespace gamejam
             if (!IsTimerRunning) return;
 
             RemainsTime -= Time.deltaTime;
+            remainTimeOfStopWatch -= Time.deltaTime;
+
             OnDuringTimer?.Invoke();
+            if (remainTimeOfStopWatch <= 0)
+            {
+                OnStopWatchEvent?.Invoke();
+                remainTimeOfStopWatch = timeParam.StopWatchEventTime; 
+            }
 
             if (RemainsTime <= 0)
             {
@@ -68,7 +77,7 @@ namespace gamejam
         /// </summary>
         /// <param name="timeLimit"></param>
         /// <param name="delayTime"></param>
-        public void StartTimer(int timeLimit)
+         void StartTimer(int timeLimit)
         {
             RemainsTime = TimeLimit = timeLimit;
             IsTimerRunning = true;
@@ -81,6 +90,7 @@ namespace gamejam
         public void StartTimer()
         {
             if (timeParam == null) throw new NullReferenceException($"timePramはnull");
+            remainTimeOfStopWatch = timeParam.StopWatchEventTime;
             StartTimer(timeParam.TimeLimit);
         }
 
