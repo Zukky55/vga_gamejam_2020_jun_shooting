@@ -104,7 +104,8 @@ MonoBehaviour:
   rb2d: {fileID: 7531788782940482436}
   aim_rb2d: {fileID: 7531788783544997198}
   aim: {fileID: 7531788783544997201}
-  damage: {fileID: 0}
+  damage_bar: {fileID: 0}
+  hp_bar: {fileID: 0}
   _type: 0
   offset: 1
 --- !u!50 &7531788782940482436
