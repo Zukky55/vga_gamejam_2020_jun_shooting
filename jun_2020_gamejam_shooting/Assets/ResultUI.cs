@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,26 +9,26 @@ namespace gamejam
     public class ResultUI : MonoBehaviour
     {
         [SerializeField]
-        Image player1;
+        GameObject player1;
         [SerializeField]
-        Image player2;
+        GameObject player2;
 
-        private void Awake()
+        internal void Play(OwnerType winer)
         {
-
-        }
-
-        void SetColor(bool isPlayer1, Color color)
-        {
-            if (isPlayer1)
+            GameObject go = null;
+            switch (winer)
             {
-                player1.color = color;
+                case OwnerType.Player1:
+                    go = player1;
+                    break;
+                case OwnerType.Player2:
+                    go = player1;
+                    break;
+                default:
+                    throw new ArgumentException();
             }
-            else
-            {
-                player1.color = color;
-            }
-        }
 
+            go.SetActive(true);
+        }
     }
 }

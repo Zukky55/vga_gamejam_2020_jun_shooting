@@ -1,4 +1,5 @@
 ﻿using System;
+using UniRx.Async;
 using UnityEngine;
 
 namespace gamejam
@@ -11,7 +12,6 @@ namespace gamejam
         float elapsedTime;
         private void Start()
         {
-
             GameManager.Instance.Statemachine.SubscribeEvent(When.Enter, OnStateEnter);
             GameManager.Instance.Statemachine.SubscribeEvent(When.Exit, OnStateExit);
             GameManager.Instance.Statemachine.SubscribeEvent(When.Stay, OnStateStay);
@@ -22,12 +22,14 @@ namespace gamejam
             if (!obj.Equals(State.InGame)) return;
         }
 
-        private void OnStateEnter(State obj)
+        private async void OnStateEnter(State obj)
         {
             if (!obj.Equals(State.InGame)) return;
 
             startTIme = elapsedTime = Time.timeSinceLevelLoad;
 
+            await UniTask.DelayFrame(1);
+            GameManager.Instance.Result(OwnerType.Player1);
         }
 
         private void OnStateExit(State obj)

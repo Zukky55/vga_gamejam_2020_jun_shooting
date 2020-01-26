@@ -3,14 +3,12 @@ using UniRx;
 using UniRx.Triggers;
 using UniRx.Async;
 using System.Collections.Generic;
+using System;
 
 namespace gamejam
 {
     public class CountDownState : MonoBehaviour
     {
-        [SerializeField]
-        TimeParameter param;
-
         [SerializeField]
         Sprite[] sprites = new Sprite[5];
 
@@ -20,17 +18,12 @@ namespace gamejam
         [SerializeField]
         GameObject countdownUI;
 
-        Timer timer;
-        int index;
+        int index = 0;
 
         private void Start()
         {
             GameManager.Instance.Statemachine.SubscribeEvent(When.Enter, OnStateEnter);
-
-            timer = new Timer(param);
-            timer.OnEndTimer += Timer_OnEndTimer;
-            timer.OnStopWatchEvent += Timer_OnStopWatchEvent;
-            index = sprites.Length - 1;
+            GameManager.Instance.Statemachine.SubscribeEvent(When.Stay, OnStateStay);
 
             if (!countdownUI)
             {
@@ -38,32 +31,25 @@ namespace gamejam
             }
         }
 
-        private void Timer_OnStopWatchEvent()
-        {
-            --index;
-            if (index >= 0)
-            {
-                sr.sprite = sprites[index];
-            }
-        }
-
-        private void Timer_OnEndTimer()
-        {
-            GameManager.Instance.Statemachine.SetState(State.InGame);
-            Destroy(gameObject);
-        }
-
-        private void Update()
-        {
-            timer.UpdateTimer();
-        }
-
-        private void OnStateEnter(State obj)
+        private async void OnStateStay(State obj)
         {
             if (!obj.Equals(State.CountDown)) return;
 
-            timer.StartTimer();
 
+        }
+
+        private async void OnStateEnter(State obj)
+        {
+            if (!obj.Equals(State.CountDown)) return;
+
+            while (index < sprites.Length)
+            {
+                sr.sprite = sprites[index];
+                ++index;
+                await UniTask.Delay(TimeSpan.FromSeconds(1));
+            }
+            GameManager.Instance.Statemachine.SetState(State.InGame);
+            Destroy(countdownUI);
         }
     }
 }
