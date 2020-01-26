@@ -2,113 +2,95 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace gamejam
-{
+namespace gamejam {
 
-    public class player : MonoBehaviour, IOnwer
-    {
-        [SerializeField]
-        private int hp = 10;
-        [SerializeField]
-        private float reload_speed = 2;
-        [SerializeField]
-        private string player_mode = "player1";
-        [SerializeField]
-        private float bullet_speed = 0.1f;
-        [SerializeField]
-        private float speed = 0.1f;
-        [SerializeField]
-        private Rigidbody2D rb2d;
-        [SerializeField]
-        private Rigidbody2D aim_rb2d;
-        [SerializeField]
-        private GameObject aim;
-        [SerializeField]
-        private GameObject damage;
-        [SerializeField]
-        private OwnerType _type;
+	public class player : MonoBehaviour, IOnwer {
+		[SerializeField]
+		private int hp = 10;
+		[SerializeField]
+		private float reload_speed = 2;
+		[SerializeField]
+		private string player_mode = "player1";
+		[SerializeField]
+		private float bullet_speed = 0.1f;
+		[SerializeField]
+		private float speed = 0.1f;
+		[SerializeField]
+		private Rigidbody2D rb2d;
+		[SerializeField]
+		private Rigidbody2D aim_rb2d;
+		[SerializeField]
+		private GameObject aim;
+		[SerializeField]
+		private GameObject damage;
+		[SerializeField]
+		private OwnerType _type;
 
 
-        public float Horizontal => Input.GetAxis("Horizontal_" + player_mode);
-        public float Vertical => Input.GetAxis("Vertical_" + player_mode);
-        public Vector3 Velocity => new Vector3(Horizontal, Vertical, 0f);
+		public float Horizontal => Input.GetAxis("Horizontal_" + player_mode);
+		public float Vertical => Input.GetAxis("Vertical_" + player_mode);
+		public Vector3 Velocity => new Vector3(Horizontal, Vertical, 0f);
 
-        public float AimHorizontal => Input.GetAxis("AimHorizontal_" + player_mode);
-        public float AimVertical => Input.GetAxis("AimVertical_" + player_mode);
-        public Vector3 AimVelocity => new Vector3(AimHorizontal * bullet_speed, AimVertical * bullet_speed, 0f);
-        public int HP => hp;
-        public OwnerType Type => _type;
+		public float AimHorizontal => Input.GetAxisRaw("AimHorizontal_" + player_mode);
+		public float AimVertical => Input.GetAxisRaw("AimVertical_" + player_mode);
+		public Vector3 AimVelocity => new Vector3(AimHorizontal, AimVertical, 0f);
+		public int HP => hp;
+		public OwnerType Type => _type;
 
-        private float bullet_wait_counter = 0;
-        private bool bullet_wait = false;
-
-
-        void Start()
-        {
-            rb2d = GetComponent<Rigidbody2D>();
-            aim_rb2d = aim.GetComponent<Rigidbody2D>();
-        }
-
-        void Update()
-        {
-
-            if (Velocity != Vector3.zero)
-            {
-                Move();
-            }
-
-            if (AimVelocity != Vector3.zero)
-            {
-                aim_rb2d.transform.position = (AimVelocity + transform.position);
-            }
-            else aim_rb2d.transform.position = transform.position;
+		private float bullet_wait_counter = 0;
+		private bool bullet_wait = false;
 
 
-            if (Input.GetAxis("shot_" + player_mode) != 0)
-            {
-                if (bullet_wait == false)
-                {
-                    var b = ResourceManager.GetBullet(OwnerType.Player1);
-                    b.Shot(transform.position, AimVelocity);
-                    bullet_wait = true;
-                }
-            }
-            if (bullet_wait == true)
-            {
-                bullet_wait_counter += Time.deltaTime;
-                if (bullet_wait_counter >= reload_speed)
-                {
-                    bullet_wait = false;
-                    bullet_wait_counter = 0;
-                }
-            }
+		void Start() {
+			rb2d = GetComponent<Rigidbody2D>();
+			aim_rb2d = aim.GetComponent<Rigidbody2D>();
+		}
 
-            if (hp == 0)
-            {
-                gameObject.SetActive(false);
-            }
-        }
+		void Update() {
 
-        void OnTriggerEnter2D(Collider2D other)
-        {
-            Bullet b = other.GetComponent<Bullet>();
-            hp -= 1;
-        }
+			if (Velocity != Vector3.zero) {
+				Move();
+			}
 
-        private void Move()
-        {
-            rb2d.transform.position += Velocity * speed;
-        }
+			if (AimVelocity != Vector3.zero) {
+				aim_rb2d.transform.position = (AimVelocity + transform.position);
+			}
+			else aim_rb2d.transform.position = transform.position;
+			
 
-        public void TakeDamage(int damage)
-        {
-            --hp;
-        }
+			OwnerType mode = OwnerType.Other;
+			if (Input.GetAxis("shot_" + player_mode) != 0) {
+				if (bullet_wait == false) {
+					if (player_mode == "player1") mode = OwnerType.Player1;
+					else if (player_mode == "player2") mode = OwnerType.Player2;
+					var b = ResourceManager.GetBullet(mode);
+					b.Shot(transform.position, AimVelocity.normalized * bullet_speed);
+					bullet_wait = true;
+				}
+			}
+			if (bullet_wait == true) {
+				bullet_wait_counter += Time.deltaTime;
+				if (bullet_wait_counter >= reload_speed) {
+					bullet_wait = false;
+					bullet_wait_counter = 0;
+				}
+			}
+		}
 
-        public void Destroy()
-        {
-            // tds
-            Destroy(gameObject);
-        }
-    }
+	
+
+		private void Move() {
+			rb2d.transform.position += Velocity * speed;
+		}
+
+		public void TakeDamage(int damage) {
+			--hp;
+		}
+
+		public void Destroy() {
+			// tds
+			// TODO 負けたtypeを入れる
+			Destroy(gameObject);
+		}
+	}
 }
