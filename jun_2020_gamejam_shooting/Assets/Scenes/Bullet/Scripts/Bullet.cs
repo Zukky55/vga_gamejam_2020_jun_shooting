@@ -76,7 +76,7 @@ namespace gamejam
             IOnwer owner = null;
             if (collision.gameObject.TryGetComponent(out owner))
             {
-                if (!owner.Type.Equals(param.Type))
+                if (!owner.Type.Equals(param.Type)|| owner.Type.Equals(OwnerType.Bomb))
                 {
                     owner.TakeDamage(param.Atatck);
                     if (owner.HP <= 0)

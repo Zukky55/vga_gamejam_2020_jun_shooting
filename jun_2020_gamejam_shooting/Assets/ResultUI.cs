@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UniRx;
+using UniRx.Triggers;
+using UniRx.Async;
 
 namespace gamejam
 {
@@ -13,7 +16,12 @@ namespace gamejam
         [SerializeField]
         GameObject player2;
 
-        internal void Play(OwnerType winer)
+        [SerializeField]
+        Button restartButton;
+        [SerializeField]
+        Button titleButton;
+
+        public void Play(OwnerType winer)
         {
             GameObject go = null;
             switch (winer)
@@ -29,6 +37,14 @@ namespace gamejam
             }
 
             go.SetActive(true);
+
+            restartButton.gameObject.SetActive(true);
+            titleButton.gameObject.SetActive(true);
+            restartButton.Select();
+
+            //this.UpdateAsObservable()
+            //    .Where(_ => Input.GetAxisRaw("Horizontal_") > 0)
+            //    .
         }
     }
 }
