@@ -9,6 +9,7 @@ namespace gamejam
         public void OnClick()
         {
             GameManager.Instance.Statemachine.SetState(State.CountDown);
+            gameObject.SetActive(false);
         }
     }
 }

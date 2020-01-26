@@ -11,7 +11,7 @@ namespace gamejam
         [SerializeField]
         GameObject title;
 
-        private void Awake()
+        private void Start()
         {
             GameManager.Instance.Statemachine.SubscribeEvent(When.Enter, OnInitializeEnter);
             GameManager.Instance.Statemachine.SubscribeEvent(When.Exit, OnInitializeExit);
