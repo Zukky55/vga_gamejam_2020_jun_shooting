@@ -5,28 +5,26 @@ using System;
 namespace gamejam
 {
 
-    class Statemachine
+    class Statemachine : MonoSingleton<Statemachine>
     {
-        #region Singleton   
-        static Statemachine _instance = new Statemachine();
-        #endregion
 
         private State _currentState = State.Initialize;
         private bool _isFirst = false;
         private bool isfirstCalledExit = false;
         private bool isCalledEnter = false;
 
-        public State CurrentState { get => _instance._currentState; set => _instance._currentState = value; }
+        public State CurrentState { get => _currentState; set => _currentState = value; }
 
         public event Action<State> OnStateEnter = s => Debug.Log($"Enter {s}");
-        public event Action<State> OnStateStay = s => Debug.Log($"Stay {s}");
+        public event Action<State> OnStateStay = s => { };
         public event Action<State> OnStateExit = s => Debug.Log($"Exit {s}");
 
-        public static void SetState(State next) => _instance.setState(next);
-        public static void Update() => _instance.update();
-        public static void SubscribeEvent(When when, Action<State> what) => _instance.subscribeEvent(when, what);
+        public void Initialize() => SetState(State.Initialize);
+        public void CountDown() => SetState(State.CountDown);
+        public void InGame() => SetState(State.InGame);
+        public void Result() => SetState(State.Result);
 
-        void subscribeEvent(When when, Action<State> what)
+        public void SubscribeEvent(When when, Action<State> what)
         {
             switch (when)
             {
@@ -44,7 +42,7 @@ namespace gamejam
             }
         }
 
-        void setState(State next)
+        void SetState(State next)
         {
             if (isfirstCalledExit)
             {
@@ -58,7 +56,7 @@ namespace gamejam
             isCalledEnter = false;
         }
 
-        void update()
+        void Update()
         {
             if (!isCalledEnter)
             {

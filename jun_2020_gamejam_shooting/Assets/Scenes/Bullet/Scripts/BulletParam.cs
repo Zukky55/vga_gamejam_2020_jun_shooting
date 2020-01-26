@@ -1,23 +1,22 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace gamejam
 {
-    public class BulletParam : ScriptableObject
+    [Serializable]
+    public class BulletParam:IOrganized
     {
-        private Vector3 _velocity;
-        BulletType _type;
-        public Vector3 Velocity { get => _velocity; set => _velocity = value; }
-        public BulletType Type { get => _type; set => _type = value; }
-        public BulletParam() { }
-        public BulletParam(Vector3 velocity)
+        [SerializeField]
+        const int _atatck = 1;
+        [SerializeField]
+        OwnerType _type;
+
+        public OwnerType Type { get => _type; set => _type = value; }
+        public int Atatck => _atatck;
+
+        public BulletParam(OwnerType type)
         {
-            _velocity = velocity;
+            _type = type;
         }
-    }
-    public enum BulletType
-    {
-        Player1,
-        Player2,
-        Enemy,
     }
 }

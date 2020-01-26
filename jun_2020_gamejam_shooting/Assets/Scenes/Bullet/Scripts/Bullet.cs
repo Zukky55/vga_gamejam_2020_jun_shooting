@@ -12,71 +12,91 @@ namespace gamejam
     public class Bullet : MonoBehaviour
     {
         [SerializeField]
-        Rigidbody2D _rb2d;
+        Rigidbody2D rb2d;
 
-        BulletParam _param = null;
-        bool _isInitialized = false;
-        bool _isUsing = false;
-        /// TODO: プレイヤーのパラメータを受け取る様にする。
-        /// ResourceManagerが弾のメモリリソースを最初に用意して使い回す様にする
-        public static void InstantiateShot(Vector3 spawnPos, Vector3 velocity)
-        {
-            var go = Resources.Load("bullet_pink") as GameObject;
-            go = Instantiate(go, spawnPos, Quaternion.identity);
-            var bullet = go.GetComponent<Bullet>();
-            bullet.Shot(velocity);
-        }
+        [SerializeField]
+        BulletParam param;
+
+        bool isInitialized = false;
+        bool isUsing = false;
+        Vector3 velocity;
+        Vector3 spawnPos;
+
+        const float destroyBoundary = 1000f;
+
+        public bool IsUsing { get => isUsing; set => isUsing = value; }
+        public BulletParam Param { get => param; set => param = value; }
 
         private void Start()
         {
             this.UpdateAsObservable()
-                .Where(_ => _isUsing && _isInitialized)
-                .Do(_ => Debug.Log($"{this.name} is Subscribed."))
+                .Where(_ => isUsing && isInitialized)
                 .Subscribe(_ =>
                 {
                     Move();
                 })
                 .AddTo(this);
+              
+            this.UpdateAsObservable()
+                .Where(_ => (transform.position - spawnPos).sqrMagnitude > destroyBoundary)
+                .Subscribe(_ =>
+                {
+                    Deactivate();
+                })
+                .AddTo(this);
         }
 
-        public void SetUsing(bool isUse)
-        {
-            gameObject.SetActive(isUse);
-            _isUsing = isUse;
-        }
-
-        public void Shot(BulletParam param)
-        {
-            if (!gameObject.activeSelf) gameObject.SetActive(true);
-            _param = Instantiate(param);
-            _isInitialized = true;
-            _isUsing = true;
-        }
-
-        public void Shot(Vector3 velocity)
-        {
-            if (!gameObject.activeSelf) gameObject.SetActive(true);
-            _param = new BulletParam(velocity);
-            _isInitialized = true;
-            _isUsing = true;
-        }
 
         void Move()
         {
-            _rb2d.velocity = _param.Velocity;
+            rb2d.velocity = velocity;
+            transform.up = velocity;
         }
 
-        public void Diactivate(bool isClearParam)
+        public void Shot(Vector3 spawnPos, Vector3 velocity)
+        {
+            this.spawnPos = spawnPos;
+            transform.position = spawnPos;
+            if (!gameObject.activeSelf) gameObject.SetActive(true);
+            this.velocity = velocity;
+            isInitialized = true;
+            isUsing = true;
+        }
+
+        /// <summary>
+        /// TODO: シグニチャ消す。privateにする。
+        /// </summary>
+        /// <param name="isClearParam"></param>
+        public void Deactivate(bool isClearParam = false)
         {
             gameObject.SetActive(false);
-            if (isClearParam) clearParam();
-            _isUsing = false;
+            isInitialized = false;
+            isUsing = false;
         }
 
-        void clearParam()
+        private void OnCollisionEnter2D(Collision2D collision)
         {
-            _param = null;
-            _isInitialized = false;
+            IOnwer owner = null;
+            if (TryGetComponent(out owner))
+            {
+                if (owner.Type.Equals(param.Type))
+                    owner.TakeDamage(param.Atatck);
+                if (owner.HP <= 0)
+                {
+                    owner.Destroy();
+                }
+                Deactivate();
+            }
+        }
+
+        /// <summary>
+        /// TODO: 削除。
+        /// </summary>
+        /// <param name="spawnPos"></param>
+        /// <param name="velocity"></param>
+        public static void InstantiateShot(Vector3 spawnPos, Vector3 velocity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

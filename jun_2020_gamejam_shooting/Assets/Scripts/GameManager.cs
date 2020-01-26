@@ -1,52 +1,33 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace gamejam
 {
-    public class GameManager : MonoBehaviour
+    public class GameManager : MonoSingleton<GameManager>
     {
-        #region Singleton   
-        static GameManager _instance;
-        public static GameManager Instance
-        {
-            get
-            {
-                if (!_instance)
-                {
-                    _instance = FindObjectOfType(typeof(GameManager)) as GameManager;
-                    if (!_instance)
-                    {
-                        throw new NullReferenceException(nameof(GameManager));
-                    }
-                }
-                return _instance;
-            }
-        }
-        #endregion
+        Statemachine _statemachine;
+        ResourceManager _resourceManager;
 
-        List<Bullet> _bullets = new List<Bullet>();
+        List<Bullet> player1Bullets = new List<Bullet>();
+        List<Bullet> plaeyr2Bullets = new List<Bullet>();
 
-        public void Initialize() => Statemachine.SetState(State.Initialize);
-        public void CountDown() => Statemachine.SetState(State.CountDown);
-        public void InGame() => Statemachine.SetState(State.InGame);
-        public void Result() => Statemachine.SetState(State.Result);
+        internal Statemachine Statemachine => _statemachine;
+        internal ResourceManager ResourceManager => _resourceManager;
 
-
-        private void Start()
+        private void Awake()
         {
             Initialize();
         }
 
-        private void Update()
+        private void Start()
         {
-            Statemachine.Update();
+            Statemachine.Initialize();
+        }
 
-            if (Input.GetKeyDown(KeyCode.J)) CountDown();
-            if (Input.GetKeyDown(KeyCode.K)) InGame();
-            if (Input.GetKeyDown(KeyCode.L)) Result();
-
+        private void Initialize()
+        {
+            _statemachine = Statemachine.Instance;
+            _resourceManager = ResourceManager.Instance;
         }
     }
 }
