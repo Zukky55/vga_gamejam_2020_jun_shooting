@@ -14,6 +14,8 @@ namespace gamejam
         internal Statemachine Statemachine => statemachine;
         internal ResourceManager ResourceManager => resourceManager;
 
+        public OwnerType Winer { get => winer; set => winer = value; }
+
         public void Result(OwnerType winer)
         {
             this.winer = winer;

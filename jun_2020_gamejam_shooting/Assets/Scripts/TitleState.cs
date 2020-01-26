@@ -15,12 +15,13 @@ namespace gamejam
         {
             GameManager.Instance.Statemachine.SubscribeEvent(When.Enter, OnInitializeEnter);
             GameManager.Instance.Statemachine.SubscribeEvent(When.Exit, OnInitializeExit);
+
+            title.SetActive(false);
         }
 
         private void OnInitializeEnter(State obj)
         {
             if (!obj.Equals(State.Title)) return;
-            // tds
             title.SetActive(true);
         }
 

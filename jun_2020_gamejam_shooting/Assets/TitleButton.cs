@@ -8,8 +8,9 @@ namespace gamejam
     {
         public void OnClick()
         {
+
+            Debug.Log($"よばれたで");
             GameManager.Instance.Statemachine.SetState(State.CountDown);
-            gameObject.SetActive(false);
         }
     }
 }

@@ -18,7 +18,7 @@ namespace gamejam
         private void OnStateEnter(State obj)
         {
             if (!obj.Equals(State.Result)) return;
-            
+            resultUI.Play(GameManager.Instance.Winer);
         }
 
         private void OnStateExit(State obj)

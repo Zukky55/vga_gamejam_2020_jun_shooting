@@ -122,7 +122,7 @@ namespace gamejam
         /// <summary>
         /// Pause timer.
         /// </summary>
-        public void PauseTimer()
+        public void StopTimer()
         {
             IsTimerRunning = false;
         }
