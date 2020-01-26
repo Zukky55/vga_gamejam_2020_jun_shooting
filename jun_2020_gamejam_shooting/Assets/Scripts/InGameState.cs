@@ -20,6 +20,10 @@ namespace gamejam
         private void OnStateStay(State obj)
         {
             if (!obj.Equals(State.InGame)) return;
+
+            var go = Resources.Load("bom") as GameObject;
+            go = Instantiate(go, new Vector3(100f, 100f, -100f), Quaternion.identity);
+            var bom = go.GetComponent<bom>();
         }
 
         private void OnStateEnter(State obj)

@@ -91,6 +91,10 @@ namespace gamejam {
 
 		private void Move() {
 			rb2d.transform.position += Velocity * speed;
+			if (rb2d.transform.position.x <= -8.3) rb2d.transform.position -= new Vector3(-0.1f,0,0);
+			if (rb2d.transform.position.x >= 8.3) rb2d.transform.position -= new Vector3(0.1f, 0, 0);
+			if (rb2d.transform.position.y <= 5.3) rb2d.transform.position -= new Vector3(0, -0.1f, 0);
+			if (rb2d.transform.position.y >= -3.3) rb2d.transform.position -= new Vector3(0, 0.1f, 0);
 		}
 
 		public void TakeDamage(int damage) {
@@ -98,8 +102,10 @@ namespace gamejam {
 		}
 
 		public void Destroy() {
-			// tds
-			// TODO 負けたtypeを入れる
+			OwnerType mode = OwnerType.Other;
+			if (player_mode == "player1") mode = OwnerType.Player2;
+			else if (player_mode == "player2") mode = OwnerType.Player1;
+			GameManager.Instance.Result(mode);
 			Destroy(gameObject);
 		}
 	}
