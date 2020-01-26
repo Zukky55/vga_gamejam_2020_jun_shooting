@@ -26,7 +26,7 @@ namespace gamejam {
 
         void OnTriggerEnter2D(Collider2D other) {
             Bullet b = other.GetComponent<Bullet>();
-            b.Diactivate(true);
+            b.Deactivate(true);
             hp -= 1;
             
         }
