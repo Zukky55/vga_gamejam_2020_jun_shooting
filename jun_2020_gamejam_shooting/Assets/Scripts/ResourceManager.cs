@@ -68,7 +68,7 @@ namespace gamejam
                 go = Instantiate(go, new Vector3(100f, 100f, -100f), Quaternion.identity);
                 bullet = go.GetComponent<Bullet>();
                 bullet.Deactivate();
-                player2Bullets.Add(bullet);
+                bombBullets.Add(bullet);
 
             }
             isInitialized = true;

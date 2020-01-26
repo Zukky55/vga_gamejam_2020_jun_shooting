@@ -132,6 +132,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: bom
       objectReference: {fileID: 0}
+    - target: {fileID: 3439287130416494352, guid: bc5af413cb4e1d44197ba9907e23dbf3,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3439287130416494353, guid: bc5af413cb4e1d44197ba9907e23dbf3,
+        type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3439287130416494353, guid: bc5af413cb4e1d44197ba9907e23dbf3,
+        type: 3}
+      propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3439287130416494353, guid: bc5af413cb4e1d44197ba9907e23dbf3,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3439287130416494355, guid: bc5af413cb4e1d44197ba9907e23dbf3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -186,6 +206,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3439287130416494356, guid: bc5af413cb4e1d44197ba9907e23dbf3,
+        type: 3}
+      propertyPath: _type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3439287130416494356, guid: bc5af413cb4e1d44197ba9907e23dbf3,
+        type: 3}
+      propertyPath: hp
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc5af413cb4e1d44197ba9907e23dbf3, type: 3}
@@ -428,6 +458,16 @@ PrefabInstance:
     - target: {fileID: 8704524353592231173, guid: 6c85f38ceb2972e4ea856a6e7819acb2,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8861915569090450732, guid: 6c85f38ceb2972e4ea856a6e7819acb2,
+        type: 3}
+      propertyPath: offset
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8861915569090450738, guid: 6c85f38ceb2972e4ea856a6e7819acb2,
+        type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
