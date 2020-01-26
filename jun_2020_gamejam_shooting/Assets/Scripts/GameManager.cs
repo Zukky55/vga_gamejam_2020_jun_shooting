@@ -1,18 +1,29 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace gamejam
 {
     public class GameManager : MonoSingleton<GameManager>
     {
-        Statemachine _statemachine;
-        ResourceManager _resourceManager;
+        Statemachine statemachine;
+        ResourceManager resourceManager;
 
-        List<Bullet> player1Bullets = new List<Bullet>();
-        List<Bullet> plaeyr2Bullets = new List<Bullet>();
+        OwnerType winer = OwnerType.None;
 
-        internal Statemachine Statemachine => _statemachine;
-        internal ResourceManager ResourceManager => _resourceManager;
+        internal Statemachine Statemachine => statemachine;
+        internal ResourceManager ResourceManager => resourceManager;
+
+        public void SetWiner(OwnerType winer)
+        {
+            this.winer = winer;
+            statemachine.SetState(State.Result);
+        }
+
+        private void OnStateEnter(State obj)
+        {
+            if (obj.Equals(State.Result)) return;
+        }
 
         private void Awake()
         {
@@ -21,13 +32,13 @@ namespace gamejam
 
         private void Start()
         {
-            Statemachine.Initialize();
+            Instance.Statemachine.SetState(State.Initialize);
         }
 
         private void Initialize()
         {
-            _statemachine = Statemachine.Instance;
-            _resourceManager = ResourceManager.Instance;
+            statemachine = Statemachine.Instance;
+            resourceManager = ResourceManager.Instance;
         }
     }
 }

@@ -29,6 +29,7 @@
         Player2,
         Bomb,
         Other,
+        None,
     }
 
     public enum SceneTitle

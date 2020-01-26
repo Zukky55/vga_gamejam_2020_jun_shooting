@@ -10,10 +10,8 @@ namespace gamejam
 
         List<Bullet> player1Bullets = new List<Bullet>();
         List<Bullet> player2Bullets = new List<Bullet>();
+        List<Bullet> bombBullets = new List<Bullet>();
         bool isInitialized = false;
-
-        public List<Bullet> Player1Bullets { get => player1Bullets; set => player1Bullets = value; }
-        public List<Bullet> Playr2Bullets { get => player2Bullets; set => player2Bullets = value; }
 
         private void Awake()
         {
@@ -34,10 +32,11 @@ namespace gamejam
             switch (type)
             {
                 case OwnerType.Player1:
-                    return Player1Bullets.Find(b => b.IsUsing.Equals(isUsing));
+                    return player1Bullets.Find(b => b.IsUsing.Equals(isUsing));
                 case OwnerType.Player2:
                     return player2Bullets.Find(b => b.IsUsing.Equals(isUsing));
-                case OwnerType.Other:
+                case OwnerType.Bomb:
+                    return bombBullets.Find(b => b.IsUsing.Equals(isUsing));
                 default:
                     throw new ArgumentException();
             }
@@ -64,6 +63,13 @@ namespace gamejam
                 bullet = go.GetComponent<Bullet>();
                 bullet.Deactivate();
                 player2Bullets.Add(bullet);
+
+                go = Resources.Load("bullet_bomb") as GameObject;
+                go = Instantiate(go, new Vector3(100f, 100f, -100f), Quaternion.identity);
+                bullet = go.GetComponent<Bullet>();
+                bullet.Deactivate();
+                player2Bullets.Add(bullet);
+
             }
             isInitialized = true;
         }

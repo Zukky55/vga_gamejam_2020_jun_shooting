@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7139300518706648060
+--- !u!1 &2630861350226023968
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7139300518706648062}
-  - component: {fileID: 7139300518706648061}
+  - component: {fileID: 8283130457491607765}
+  - component: {fileID: 5954189556712041592}
+  - component: {fileID: 256343516423522445}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -17,29 +18,41 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7139300518706648062
+--- !u!4 &8283130457491607765
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7139300518706648060}
+  m_GameObject: {fileID: 2630861350226023968}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.620117, y: -0.29882875, z: -2.3200746}
+  m_LocalPosition: {x: 960, y: 540, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7139300518706648061
+--- !u!114 &5954189556712041592
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7139300518706648060}
+  m_GameObject: {fileID: 2630861350226023968}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e47cb0a75dd696448bd445d57df86249, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &256343516423522445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2630861350226023968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46c15187617f45a4b8533ac411ed14f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
