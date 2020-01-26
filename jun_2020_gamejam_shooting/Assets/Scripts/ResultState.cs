@@ -13,11 +13,13 @@ namespace gamejam
 
             GameManager.Instance.Statemachine.SubscribeEvent(When.Enter, OnStateEnter);
             GameManager.Instance.Statemachine.SubscribeEvent(When.Exit, OnStateExit);
+            resultUI.gameObject.SetActive(false);
         }
 
         private void OnStateEnter(State obj)
         {
             if (!obj.Equals(State.Result)) return;
+            resultUI.gameObject.SetActive(true);
             resultUI.Play(GameManager.Instance.Winer);
         }
 
