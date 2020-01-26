@@ -20,13 +20,15 @@ namespace gamejam
             GameManager.Instance.Statemachine.SubscribeEvent(When.Enter, OnInitializeEnter);
         }
 
+        public static Bullet GetBullet(OwnerType type, bool isUsing = false) => m_instance.getBullet(type, isUsing);
+
         /// <summary>
         /// 条件に応じて弾の参照取得
         /// </summary>
         /// <param name="type">弾の種類</param>
         /// <param name="isUsing">使用中の弾かどうか</param>
         /// <returns></returns>
-        public Bullet GetBullet(OwnerType type, bool isUsing)
+        Bullet getBullet(OwnerType type, bool isUsing)
         {
             if (!isInitialized) throw new Exception("初期化されてへんで");
             switch (type)
