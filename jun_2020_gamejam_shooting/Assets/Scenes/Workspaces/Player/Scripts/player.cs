@@ -68,7 +68,6 @@ namespace gamejam
             {
                 if (bullet_wait == false)
                 {
-                    //TODO: shot処理
                     bullet_wait = true;
                 }
             }

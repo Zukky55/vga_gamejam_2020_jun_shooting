@@ -20,6 +20,8 @@ namespace gamejam
         public event Action<State> OnStateExit = s => Debug.Log($"Exit {s}");
 
         public void Initialize() => SetState(State.Initialize);
+        public void Title() => SetState(State.Title);
+        public void SelectCharactor() => SetState(State.SelectCharactor);
         public void CountDown() => SetState(State.CountDown);
         public void InGame() => SetState(State.InGame);
         public void Result() => SetState(State.Result);
@@ -42,7 +44,7 @@ namespace gamejam
             }
         }
 
-        void SetState(State next)
+       public void SetState(State next)
         {
             if (isfirstCalledExit)
             {
@@ -72,6 +74,8 @@ namespace gamejam
     public enum State
     {
         Initialize,
+        Title,
+        SelectCharactor,
         CountDown,
         InGame,
         Result,

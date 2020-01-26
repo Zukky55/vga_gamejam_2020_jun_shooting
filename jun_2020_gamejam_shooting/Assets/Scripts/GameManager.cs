@@ -21,7 +21,7 @@ namespace gamejam
 
         private void Start()
         {
-            Statemachine.Initialize();
+            Instance.Statemachine.SetState(State.Initialize);
         }
 
         private void Initialize()
