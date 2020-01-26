@@ -18,10 +18,15 @@ namespace gamejam
         [SerializeField]
         GameObject countdownUI;
 
+        [SerializeField]
+        private AudioClip count_se;
+        AudioSource _audioSource;
+
         int index = 0;
 
         private void Start()
         {
+            _audioSource = GetComponent<AudioSource>();
             GameManager.Instance.Statemachine.SubscribeEvent(When.Enter, OnStateEnter);
             GameManager.Instance.Statemachine.SubscribeEvent(When.Stay, OnStateStay);
 
@@ -50,6 +55,7 @@ namespace gamejam
 
             while (index < sprites.Length)
             {
+                _audioSource.PlayOneShot(count_se);
                 sr.sprite = sprites[index];
                 ++index;
                 await UniTask.Delay(TimeSpan.FromSeconds(1));
