@@ -63,11 +63,7 @@ namespace gamejam
             isUsing = true;
         }
 
-        /// <summary>
-        /// TODO: シグニチャ消す。privateにする。
-        /// </summary>
-        /// <param name="isClearParam"></param>
-        public void Deactivate(bool isClearParam = false)
+        public void Deactivate()
         {
             gameObject.SetActive(false);
             isInitialized = false;
@@ -87,16 +83,6 @@ namespace gamejam
                 }
                 Deactivate();
             }
-        }
-
-        /// <summary>
-        /// TODO: 削除。
-        /// </summary>
-        /// <param name="spawnPos"></param>
-        /// <param name="velocity"></param>
-        public static void InstantiateShot(Vector3 spawnPos, Vector3 velocity)
-        {
-            throw new NotImplementedException();
         }
     }
 }
