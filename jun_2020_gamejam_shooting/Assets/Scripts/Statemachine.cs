@@ -71,6 +71,7 @@ namespace gamejam
         CountDown,
         InGame,
         Result,
+        GameEnd,
     }
     public enum When
     {

@@ -20,6 +20,10 @@ namespace gamejam
         Button restartButton;
         [SerializeField]
         Button titleButton;
+        [SerializeField]
+        GameObject restartButtonFrame;
+        [SerializeField]
+        GameObject titleButtonFrame;
 
         public void Play(OwnerType winer)
         {
@@ -42,9 +46,24 @@ namespace gamejam
             titleButton.gameObject.SetActive(true);
             restartButton.Select();
 
-            //this.UpdateAsObservable()
-            //    .Where(_ => Input.GetAxisRaw("Horizontal_") > 0)
-            //    .
+            this.UpdateAsObservable()
+                .Select(_ => Input.GetAxisRaw("Horizontal_"))
+                .Where(val => val != 0f
+                && !GameManager.Instance.Statemachine.CurrentState.Equals(State.GameEnd))
+                .Subscribe(val =>
+                {
+                    if (val > 0)
+                    {
+                        titleButtonFrame.SetActive(false);
+                        restartButtonFrame.SetActive(true);
+                    }
+                    else
+                    {
+                        titleButtonFrame.SetActive(true);
+                        restartButtonFrame.SetActive(false);
+                    }
+                })
+                .AddTo(this);
         }
     }
 }
