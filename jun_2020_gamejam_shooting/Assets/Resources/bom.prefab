@@ -133,5 +133,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet_value: 20
-  hp: 5
+  hp: 1
   _type: 2

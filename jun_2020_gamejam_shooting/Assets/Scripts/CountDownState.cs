@@ -42,6 +42,12 @@ namespace gamejam
         {
             if (!obj.Equals(State.CountDown)) return;
 
+            for (int i = 0; i < 5; ++i) {
+                var go = Resources.Load("bom") as GameObject;
+                go = Instantiate(go, new Vector3(UnityEngine.Random.Range(-8.3f, 8.3f), UnityEngine.Random.Range(-3.3f, 5.3f), 0), Quaternion.identity);
+                var bom = go.GetComponent<bom>();
+            }
+
             while (index < sprites.Length)
             {
                 sr.sprite = sprites[index];
@@ -50,6 +56,7 @@ namespace gamejam
             }
             GameManager.Instance.Statemachine.SetState(State.InGame);
             Destroy(countdownUI);
+
         }
     }
 }

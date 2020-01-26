@@ -29,6 +29,10 @@ namespace gamejam
         private GameObject hp_bar;
         [SerializeField]
         private OwnerType _type;
+        [SerializeField]
+        private AudioClip shot_se;
+        AudioSource _audioSource;
+
 
 
         public float Horizontal => Input.GetAxis("Horizontal_" + player_mode);
@@ -51,6 +55,7 @@ namespace gamejam
         {
             rb2d = GetComponent<Rigidbody2D>();
             aim_rb2d = aim.GetComponent<Rigidbody2D>();
+            _audioSource = GetComponent<AudioSource>();
         }
 
         void Update()
@@ -76,6 +81,7 @@ namespace gamejam
                 {
                     if (bullet_wait == false)
                     {
+                        _audioSource.PlayOneShot(shot_se);
                         if (player_mode == "player1") mode = OwnerType.Player1;
                         else if (player_mode == "player2") mode = OwnerType.Player2;
                         var b = ResourceManager.GetBullet(mode);
