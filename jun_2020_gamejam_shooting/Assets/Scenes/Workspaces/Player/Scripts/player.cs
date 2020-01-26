@@ -22,7 +22,9 @@ namespace gamejam {
 		[SerializeField]
 		private GameObject aim;
 		[SerializeField]
-		private GameObject damage;
+		private GameObject damage_bar;
+		[SerializeField]
+		private GameObject hp_bar;
 		[SerializeField]
 		private OwnerType _type;
 
@@ -62,12 +64,14 @@ namespace gamejam {
 
 			OwnerType mode = OwnerType.Other;
 			if (Input.GetAxis("shot_" + player_mode) != 0) {
-				if (bullet_wait == false) {
-					if (player_mode == "player1") mode = OwnerType.Player1;
-					else if (player_mode == "player2") mode = OwnerType.Player2;
-					var b = ResourceManager.GetBullet(mode);
-					b.Shot(transform.position + AimVelocity.normalized * offset, AimVelocity.normalized * bullet_speed );
-					bullet_wait = true;
+				if (AimVelocity != Vector3.zero) {
+					if (bullet_wait == false) {
+						if (player_mode == "player1") mode = OwnerType.Player1;
+						else if (player_mode == "player2") mode = OwnerType.Player2;
+						var b = ResourceManager.GetBullet(mode);
+						b.Shot(transform.position + AimVelocity.normalized * offset, AimVelocity.normalized * bullet_speed);
+						bullet_wait = true;
+					}
 				}
 			}
 			if (bullet_wait == true) {
@@ -77,9 +81,13 @@ namespace gamejam {
 					bullet_wait_counter = 0;
 				}
 			}
+
+			//hp_bar.transform.position = transform.position;
+			//damage_bar.transform.position = transform.position;
+
 		}
 
-	
+
 
 		private void Move() {
 			rb2d.transform.position += Velocity * speed;

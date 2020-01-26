@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,6 +25,14 @@ namespace gamejam {
         {
             rm = GameManager.Instance.ResourceManager;
         }
+        private void Start() {
+            GameManager.Instance.Statemachine.SubscribeEvent(When.Stay, OnStateStay);
+        }
+
+        private void OnStateStay(State obj) {
+            if (!obj.Equals(State.InGame)) return;
+
+        }
 
         void Update() {
  
@@ -37,7 +46,7 @@ namespace gamejam {
         public void Destroy() {
             for (int i = 0; i < bullet_value; ++i) {
                 var b = ResourceManager.GetBullet(_type);
-                b.Shot(transform.position, new Vector3(Random.Range(-4f, 4f), Random.Range(-4f, 4f), 0) * 1.5f);
+                b.Shot(transform.position, new Vector3(UnityEngine.Random.Range(-4f, 4f), UnityEngine.Random.Range(-4f, 4f), 0) * 1.5f);
             }
             gameObject.SetActive(false);
         }
