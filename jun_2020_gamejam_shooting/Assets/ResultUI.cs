@@ -46,7 +46,5 @@ namespace gamejam
             //    .Where(_ => Input.GetAxisRaw("Horizontal_") > 0)
             //    .
         }
-
-
     }
 }
