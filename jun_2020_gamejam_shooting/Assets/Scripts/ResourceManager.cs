@@ -54,13 +54,13 @@ namespace gamejam
                 var go = Resources.Load("bullet_pink") as GameObject;
                 go = Instantiate(go, new Vector3(100f, 100f, -100f), Quaternion.identity);
                 var bullet = go.GetComponent<Bullet>();
-                bullet.Deactivate(false);
+                bullet.Deactivate();
                 player1Bullets.Add(bullet);
 
                 go = Resources.Load("bullet_blue") as GameObject;
                 go = Instantiate(go, new Vector3(100f, 100f, -100f), Quaternion.identity);
                 bullet = go.GetComponent<Bullet>();
-                bullet.Deactivate(false);
+                bullet.Deactivate();
                 player2Bullets.Add(bullet);
             }
             isInitialized = true;

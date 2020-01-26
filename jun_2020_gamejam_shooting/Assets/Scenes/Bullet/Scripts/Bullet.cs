@@ -36,7 +36,7 @@ namespace gamejam
                     Move();
                 })
                 .AddTo(this);
-              
+
             this.UpdateAsObservable()
                 .Where(_ => (transform.position - spawnPos).sqrMagnitude > destroyBoundary)
                 .Subscribe(_ =>
@@ -63,11 +63,7 @@ namespace gamejam
             isUsing = true;
         }
 
-        /// <summary>
-        /// TODO: シグニチャ消す。privateにする。
-        /// </summary>
-        /// <param name="isClearParam"></param>
-        public void Deactivate(bool isClearParam = false)
+        public void Deactivate()
         {
             gameObject.SetActive(false);
             isInitialized = false;
@@ -77,26 +73,18 @@ namespace gamejam
         private void OnCollisionEnter2D(Collision2D collision)
         {
             IOnwer owner = null;
-            if (TryGetComponent(out owner))
+            if (collision.gameObject.TryGetComponent(out owner))
             {
-                if (owner.Type.Equals(param.Type))
-                    owner.TakeDamage(param.Atatck);
-                if (owner.HP <= 0)
+                if (!owner.Type.Equals(param.Type))
                 {
-                    owner.Destroy();
+                    owner.TakeDamage(param.Atatck);
+                    if (owner.HP <= 0)
+                    {
+                        owner.Destroy();
+                    }
                 }
                 Deactivate();
             }
-        }
-
-        /// <summary>
-        /// TODO: 削除。
-        /// </summary>
-        /// <param name="spawnPos"></param>
-        /// <param name="velocity"></param>
-        public static void InstantiateShot(Vector3 spawnPos, Vector3 velocity)
-        {
-            throw new NotImplementedException();
         }
     }
 }

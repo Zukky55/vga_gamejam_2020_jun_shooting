@@ -27,6 +27,7 @@
     {
         Player1,
         Player2,
+        Bomb,
         Other,
     }
 
