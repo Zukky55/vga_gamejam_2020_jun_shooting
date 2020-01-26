@@ -5,7 +5,7 @@ using UnityEngine;
 namespace gamejam
 {
 
-    public class player : MonoBehaviour
+    public class player : MonoBehaviour, IOnwer
     {
         [SerializeField]
         private int hp = 10;
@@ -24,11 +24,11 @@ namespace gamejam
         [SerializeField]
         private GameObject aim;
         [SerializeField]
-        private GameObject life;
-        [SerializeField]
         private GameObject damage;
+        [SerializeField]
+        private OwnerType _type;
 
-        ResourceManager resourceManager;
+        ResourceManager rm;
 
         public float Horizontal => Input.GetAxis("Horizontal_" + player_mode);
         public float Vertical => Input.GetAxis("Vertical_" + player_mode);
@@ -37,13 +37,15 @@ namespace gamejam
         public float AimHorizontal => Input.GetAxis("AimHorizontal_" + player_mode);
         public float AimVertical => Input.GetAxis("AimVertical_" + player_mode);
         public Vector3 AimVelocity => new Vector3(AimHorizontal * bullet_speed, AimVertical * bullet_speed, 0f);
+        public int HP => hp;
+        public OwnerType Type => _type;
 
         private float bullet_wait_counter = 0;
         private bool bullet_wait = false;
 
         private void Awake()
         {
-            resourceManager = GameManager.Instance.ResourceManager;
+            rm = GameManager.Instance.ResourceManager;
         }
 
         void Start()
@@ -100,6 +102,17 @@ namespace gamejam
         private void Move()
         {
             rb2d.transform.position += Velocity * speed;
+        }
+
+        public void TakeDamage(int damage)
+        {
+            --hp;
+        }
+
+        public void Destroy()
+        {
+            // tds
+            Destroy(gameObject);
         }
     }
 }

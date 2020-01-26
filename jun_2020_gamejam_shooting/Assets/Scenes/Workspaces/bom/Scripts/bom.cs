@@ -4,7 +4,9 @@ using UnityEngine;
 
 namespace gamejam {
 
-    public class bom : MonoBehaviour {
+    public class bom : MonoBehaviour 
+
+    {
         [SerializeField]
         private int bullet_value = 30;
         [SerializeField]

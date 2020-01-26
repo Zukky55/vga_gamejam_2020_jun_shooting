@@ -36,7 +36,7 @@ namespace gamejam
                     Move();
                 })
                 .AddTo(this);
-              
+
             this.UpdateAsObservable()
                 .Where(_ => (transform.position - spawnPos).sqrMagnitude > destroyBoundary)
                 .Subscribe(_ =>
@@ -73,13 +73,15 @@ namespace gamejam
         private void OnCollisionEnter2D(Collision2D collision)
         {
             IOnwer owner = null;
-            if (TryGetComponent(out owner))
+            if (collision.gameObject.TryGetComponent(out owner))
             {
-                if (owner.Type.Equals(param.Type))
-                    owner.TakeDamage(param.Atatck);
-                if (owner.HP <= 0)
+                if (!owner.Type.Equals(param.Type))
                 {
-                    owner.Destroy();
+                    owner.TakeDamage(param.Atatck);
+                    if (owner.HP <= 0)
+                    {
+                        owner.Destroy();
+                    }
                 }
                 Deactivate();
             }
