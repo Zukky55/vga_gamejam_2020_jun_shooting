@@ -82,8 +82,8 @@ namespace gamejam
                     {
                         owner.Destroy();
                     }
+                    Deactivate();
                 }
-                Deactivate();
             }
         }
     }
