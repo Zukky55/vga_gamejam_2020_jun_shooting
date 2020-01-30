@@ -120,6 +120,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &53589072 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 954974491, guid: 9e4b66925afa0ea478bb3a9d07faf8d3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1828994497312840255}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &224169468
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,6 +357,12 @@ SpriteRenderer:
     type: 3}
   m_PrefabInstance: {fileID: 8710506806871421961}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &711974749 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 348689409, guid: 9e4b66925afa0ea478bb3a9d07faf8d3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1828994497312840255}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &753790319
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,6 +461,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4975329476009902358, guid: ec743e3dd84849b4ca66cfc3ecd5ad1f,
+        type: 3}
+      propertyPath: hp
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 4975329476009902359, guid: ec743e3dd84849b4ca66cfc3ecd5ad1f,
         type: 3}
@@ -1139,6 +1156,11 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 7531788782940482435, guid: 6c85f38ceb2972e4ea856a6e7819acb2,
+        type: 3}
+      propertyPath: hp
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 7531788782940482438, guid: 6c85f38ceb2972e4ea856a6e7819acb2,
         type: 3}
       propertyPath: m_Name
@@ -1153,9 +1175,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 348689409, guid: 9e4b66925afa0ea478bb3a9d07faf8d3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 752752667, guid: 9e4b66925afa0ea478bb3a9d07faf8d3, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 954974491, guid: 9e4b66925afa0ea478bb3a9d07faf8d3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1333624469, guid: 9e4b66925afa0ea478bb3a9d07faf8d3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1844230106, guid: 9e4b66925afa0ea478bb3a9d07faf8d3, type: 3}
       propertyPath: restartButtonFrame
@@ -1165,8 +1199,26 @@ PrefabInstance:
       propertyPath: titleButtonFrame
       value: 
       objectReference: {fileID: 1828994497312840256}
+    - target: {fileID: 1844230106, guid: 9e4b66925afa0ea478bb3a9d07faf8d3, type: 3}
+      propertyPath: player1
+      value: 
+      objectReference: {fileID: 711974749}
+    - target: {fileID: 1844230106, guid: 9e4b66925afa0ea478bb3a9d07faf8d3, type: 3}
+      propertyPath: player2
+      value: 
+      objectReference: {fileID: 53589072}
     - target: {fileID: 2078253358, guid: 9e4b66925afa0ea478bb3a9d07faf8d3, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 103229072190096034, guid: 9e4b66925afa0ea478bb3a9d07faf8d3,
+        type: 3}
+      propertyPath: m_Transition
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 103229072190096034, guid: 9e4b66925afa0ea478bb3a9d07faf8d3,
+        type: 3}
+      propertyPath: m_Colors.m_DisabledColor.a
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1828994497514032567, guid: 9e4b66925afa0ea478bb3a9d07faf8d3,
@@ -1289,6 +1341,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8219414443046390032, guid: 9e4b66925afa0ea478bb3a9d07faf8d3,
+        type: 3}
+      propertyPath: m_Transition
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8219414443046390032, guid: 9e4b66925afa0ea478bb3a9d07faf8d3,
+        type: 3}
+      propertyPath: m_Colors.m_DisabledColor.a
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e4b66925afa0ea478bb3a9d07faf8d3, type: 3}
 --- !u!1 &1828994497312840256 stripped
@@ -1324,6 +1386,10 @@ PrefabInstance:
       propertyPath: title
       value: 
       objectReference: {fileID: 1828994497312840257}
+    - target: {fileID: 2070138651, guid: 340dc008eba27b64d85e8ed8ce2b1164, type: 3}
+      propertyPath: useCountDown
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2070138652, guid: 340dc008eba27b64d85e8ed8ce2b1164, type: 3}
       propertyPath: sr
       value: 

@@ -25,8 +25,8 @@
 
     public enum OwnerType
     {
-        Player1,
-        Player2,
+        player1,
+        player2,
         Bomb,
         Other,
         None,

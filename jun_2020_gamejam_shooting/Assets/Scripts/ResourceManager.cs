@@ -33,9 +33,9 @@ namespace gamejam
             if (!isInitialized) throw new Exception("初期化されてへんで");
             switch (type)
             {
-                case OwnerType.Player1:
+                case OwnerType.player1:
                     return player1Bullets.Find(b => b.IsUsing.Equals(isUsing));
-                case OwnerType.Player2:
+                case OwnerType.player2:
                     return player2Bullets.Find(b => b.IsUsing.Equals(isUsing));
                 case OwnerType.Bomb:
                     return bombBullets.Find(b => b.IsUsing.Equals(isUsing));

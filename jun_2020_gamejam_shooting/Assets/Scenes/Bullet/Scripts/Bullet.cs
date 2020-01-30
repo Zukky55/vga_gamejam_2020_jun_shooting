@@ -57,6 +57,7 @@ namespace gamejam
         {
             this.spawnPos = spawnPos;
             transform.position = spawnPos;
+            transform.up = velocity.normalized;
             if (!gameObject.activeSelf) gameObject.SetActive(true);
             this.velocity = velocity;
             isInitialized = true;

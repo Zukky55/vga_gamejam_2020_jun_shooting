@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace gamejam
 {
@@ -10,10 +12,19 @@ namespace gamejam
 
         private void Start()
         {
-
             GameManager.Instance.Statemachine.SubscribeEvent(When.Enter, OnStateEnter);
             GameManager.Instance.Statemachine.SubscribeEvent(When.Exit, OnStateExit);
+            GameManager.Instance.Statemachine.SubscribeEvent(When.Stay, OnStateStay);
             resultUI.gameObject.SetActive(false);
+        }
+
+        private void OnStateStay(State obj)
+        {
+            if (!obj.Equals(State.Result)) return;
+            if (Input.GetAxis("Sphere") != 0f)
+            {
+                SceneManager.LoadScene("Main", LoadSceneMode.Single);
+            }
         }
 
         private void OnStateEnter(State obj)

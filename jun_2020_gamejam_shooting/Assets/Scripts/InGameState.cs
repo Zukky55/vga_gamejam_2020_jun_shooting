@@ -25,6 +25,10 @@ namespace gamejam {
 
 			startTIme = elapsedTime = Time.timeSinceLevelLoad;
 
+			//await UniTask.Delay(TimeSpan.FromSeconds(1));
+			//GameManager.Instance.Result(OwnerType.player2);
+
+
 			while (obj.Equals(State.InGame)) {
 				await UniTask.Delay(TimeSpan.FromSeconds(5));
 
@@ -37,8 +41,6 @@ namespace gamejam {
 		private void OnStateExit(State obj) {
 			if (!obj.Equals(State.InGame)) return;
 		}
-
-
 	}
 
 }

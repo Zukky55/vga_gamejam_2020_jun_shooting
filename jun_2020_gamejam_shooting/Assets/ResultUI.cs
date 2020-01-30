@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UniRx;
 using UniRx.Triggers;
 using UniRx.Async;
+using UnityEngine.SceneManagement;
 
 namespace gamejam
 {
@@ -30,11 +31,11 @@ namespace gamejam
             GameObject go = null;
             switch (winer)
             {
-                case OwnerType.Player1:
+                case OwnerType.player1:
                     go = player1;
                     break;
-                case OwnerType.Player2:
-                    go = player1;
+                case OwnerType.player2:
+                    go = player2;
                     break;
                 default:
                     throw new ArgumentException();
@@ -44,23 +45,26 @@ namespace gamejam
 
             restartButton.gameObject.SetActive(true);
             titleButton.gameObject.SetActive(true);
-            restartButton.Select();
 
             this.UpdateAsObservable()
-                .Select(_ => Input.GetAxisRaw("Horizontal_"))
+                .Select(_ => Input.GetAxis($"Horizontal"))
                 .Where(val => val != 0f
                 && !GameManager.Instance.Statemachine.CurrentState.Equals(State.GameEnd))
                 .Subscribe(val =>
                 {
-                    if (val > 0)
+                    if (val > 0f)
                     {
                         titleButtonFrame.SetActive(false);
+                        titleButton.interactable = false;
                         restartButtonFrame.SetActive(true);
+                        restartButton.interactable = true;
                     }
                     else
                     {
                         titleButtonFrame.SetActive(true);
                         restartButtonFrame.SetActive(false);
+                        titleButton.interactable = true;
+                        restartButton.interactable = false;
                     }
                 })
                 .AddTo(this);

@@ -39,8 +39,8 @@ namespace gamejam
         public float Vertical => Input.GetAxis("Vertical_" + player_mode);
         public Vector3 Velocity => new Vector3(Horizontal, Vertical, 0f);
 
-        public float AimHorizontal => Input.GetAxisRaw("AimHorizontal_" + player_mode);
-        public float AimVertical => Input.GetAxisRaw("AimVertical_" + player_mode);
+        public float AimHorizontal => Input.GetAxis("AimHorizontal_" + player_mode);
+        public float AimVertical => Input.GetAxis("AimVertical_" + player_mode);
         public Vector3 AimVelocity => new Vector3(AimHorizontal, AimVertical, 0f);
         public int HP => hp;
         public OwnerType Type => _type;
@@ -62,6 +62,7 @@ namespace gamejam
         {
             if (!GameManager.Instance.Statemachine.CurrentState.Equals(State.InGame)) return;
 
+            Debug.Log($"{player_mode} vel = {AimVelocity}");
             if (Velocity != Vector3.zero)
             {
                 Move();
@@ -69,25 +70,21 @@ namespace gamejam
 
             if (AimVelocity != Vector3.zero)
             {
-                aim_rb2d.transform.position = (AimVelocity + transform.position);
+                aim.transform.position = (AimVelocity.normalized + transform.position);
             }
-            else aim_rb2d.transform.position = transform.position;
 
 
             OwnerType mode = OwnerType.Other;
             if (Input.GetAxis("shot_" + player_mode) != 0)
             {
-                if (AimVelocity != Vector3.zero)
+                if (bullet_wait == false)
                 {
-                    if (bullet_wait == false)
-                    {
-                        _audioSource.PlayOneShot(shot_se);
-                        if (player_mode == "player1") mode = OwnerType.Player1;
-                        else if (player_mode == "player2") mode = OwnerType.Player2;
-                        var b = ResourceManager.GetBullet(mode);
-                        b.Shot(transform.position + AimVelocity.normalized * offset, AimVelocity.normalized * bullet_speed);
-                        bullet_wait = true;
-                    }
+                    _audioSource.PlayOneShot(shot_se);
+                    if (player_mode == "player1") mode = OwnerType.player1;
+                    else if (player_mode == "player2") mode = OwnerType.player2;
+                    var b = ResourceManager.GetBullet(mode);
+                    b.Shot(aim.transform.position, (aim.transform.position - transform.position) * bullet_speed);
+                    bullet_wait = true;
                 }
             }
             if (bullet_wait == true)
@@ -126,11 +123,11 @@ namespace gamejam
             OwnerType mode = OwnerType.None;
             if (player_mode == "player1")
             {
-                mode = OwnerType.Player2;
+                mode = OwnerType.player2;
             }
             else
             {
-                mode = OwnerType.Player1;
+                mode = OwnerType.player1;
             }
             GameManager.Instance.Result(mode);
             Destroy(gameObject);
